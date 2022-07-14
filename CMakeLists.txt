@@ -12,6 +12,11 @@ configure_file (
 	"${PROJECT_SOURCE_DIR}/version.hpp.in"
 	"${PROJECT_SOURCE_DIR}/include/version.hpp"
 )
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -stdlib=libc++ -nostdinc++ \
+-I${UE5_ROOT}/Engine/Source/ThirdParty/Unix/LibCxx/include/c++/v1 \
+-L${UE5_ROOT}/Engine/Source/ThirdParty/Unix/LibCxx/lib \
+ ")
+ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # C++ standard requirements.
 set(CMAKE_CXX_STANDARD 14)
@@ -134,10 +139,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 )
 
 # Compile definitions for libwebrtc.
-target_compile_definitions(${PROJECT_NAME} PUBLIC
-	$<$<NOT:$<PLATFORM_ID:Windows>>:WEBRTC_POSIX>
-	$<$<PLATFORM_ID:Windows>:WEBRTC_WIN>
-	$<$<PLATFORM_ID:Darwin>:WEBRTC_MAC>
+target_compile_definitions(${PROJECT_NAME} PUBLIC WEBRTC_POSIX
+
 )
 
 install(TARGETS mediasoupclient DESTINATION lib)
