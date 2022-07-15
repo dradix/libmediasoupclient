@@ -1,0 +1,73 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "linux-unreal",
+            "displayName": "Linux Unreal",
+            "description": "Target is linux",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/out_server/build/${presetName}",
+            "cacheVariables": {
+                "UE5_ROOT": "/home/robot/ue5/UnrealEngine",
+                "CMAKE_C_COMPILER": "/home/robot/ue5/UnrealEngine/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v20_clang-13.0.1-centos7/x86_64-unknown-linux-gnu/bin/clang",
+                "CMAKE_CXX_COMPILER": "/home/robot/ue5/UnrealEngine/Engine/Extras/ThirdPartyNotUE/SDKs/HostLinux/Linux_x64/v20_clang-13.0.1-centos7/x86_64-unknown-linux-gnu/bin/clang++",
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "LIBWEBRTC_INCLUDE_PATH": {
+                    "value": "/home/robot/Downloads/src/",
+                    "type": "STRING"
+                },
+                
+                "LIBWEBRTC_BINARY_PATH": {
+                    "value": "/home/robot/RR/edgeserver-unreal_o/Plugins/MediaSoupClientLibrary/Source/ThirdParty/MediaSoupClientLibrary/lib/x64/Linux/Release",
+                    "type": "STRING"
+                }
+             
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Linux"
+                    ]
+                },
+                "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+                    "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+                }
+            }
+        },
+        {
+            "name": "linux-clang",
+            "displayName": "Linux Clang",
+            "description": "Target is linux",
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/out_server/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}",
+                "LIBWEBRTC_INCLUDE_PATH": {
+                    "value": "/home/robot/Downloads/src/",
+                    "type": "STRING"
+                },
+                
+                "LIBWEBRTC_BINARY_PATH": {
+                    "value": "/home/robot/RR/edgeserver-unreal_o/Plugins/MediaSoupClientLibrary/Source/ThirdParty/MediaSoupClientLibrary/lib/x64/Linux/Release",
+                    "type": "STRING"
+                }
+             
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [
+                        "Linux"
+                    ]
+                },
+                "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+                    "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+                }
+            }
+        }
+       
+    ]
+}
