@@ -18,12 +18,10 @@ namespace mediasoupclient
 			ANSWER
 		};
 
-		static std::map<PeerConnection::SdpType, const std::string> sdpType2String;
-		static std::map<webrtc::PeerConnectionInterface::IceConnectionState, const std::string>
-		  iceConnectionState2String;
-		static std::map<webrtc::PeerConnectionInterface::IceGatheringState, const std::string>
-		  iceGatheringState2String;
-		static std::map<webrtc::PeerConnectionInterface::SignalingState, const std::string> signalingState2String;
+		static  std::map<PeerConnection::SdpType, const std::string> & GetSdpType2String ();
+		static  std::map<webrtc::PeerConnectionInterface::IceConnectionState, const std::string>& GetIceConnectionState2String();
+		static  std::map<webrtc::PeerConnectionInterface::IceGatheringState, const std::string>& GetIceGatheringState2String();  
+		static  std::map<webrtc::PeerConnectionInterface::SignalingState, const std::string>& GetSignalingState2String();
 
 	public:
 		class PrivateListener : public webrtc::PeerConnectionObserver

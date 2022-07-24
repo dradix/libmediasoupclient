@@ -19,7 +19,7 @@
                 },
                 
                 "LIBWEBRTC_BINARY_PATH": {
-                    "value": "/home/robot/RR/edgeserver-unreal_o/Plugins/MediaSoupClientLibrary/Source/ThirdParty/MediaSoupClientLibrary/lib/x64/Linux/Release",
+                    "value": "/home/robot/ue5/UnrealEngine/Engine/Source/ThirdParty/WebRTC/4147/Lib/Linux/x86_64-unknown-linux-gnu/Release",
                     "type": "STRING"
                 }
              

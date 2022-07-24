@@ -68,9 +68,9 @@ namespace sdptransform
 				location = std::addressof(media[media.size() - 1]);
 			}
 
-			auto it = grammar::rulesMap.find(type);
+			auto it = grammar::GetRulesMap().find(type);
 
-			if (it == grammar::rulesMap.end())
+			if (it == grammar::GetRulesMap().end())
 				continue;
 
 			auto& rules = it->second;

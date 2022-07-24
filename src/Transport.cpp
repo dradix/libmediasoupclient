@@ -36,7 +36,7 @@ namespace mediasoupclient
 	{
 		MSC_TRACE();
 
-		return PeerConnection::iceConnectionState2String[this->connectionState];
+		return PeerConnection::GetIceConnectionState2String()[this->connectionState];
 	}
 
 	json& Transport::GetAppData()
@@ -115,7 +115,7 @@ namespace mediasoupclient
 		this->connectionState = connectionState;
 
 		return this->listener->OnConnectionStateChange(
-		  this, PeerConnection::iceConnectionState2String[connectionState]);
+		  this, PeerConnection::GetIceConnectionState2String()[connectionState]);
 	}
 
 	/* SendTransport */

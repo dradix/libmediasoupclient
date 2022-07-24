@@ -17,36 +17,53 @@ namespace mediasoupclient
 {
 	/* Static. */
 
-	// clang-format off
-	std::map<PeerConnection::SdpType, const std::string> PeerConnection::sdpType2String =
+	std::map<PeerConnection::SdpType, const std::string>& PeerConnection::GetSdpType2String()
 	{
-		{ PeerConnection::SdpType::OFFER,    "offer"    },
-		{ PeerConnection::SdpType::PRANSWER, "pranswer" },
-		{ PeerConnection::SdpType::ANSWER,   "answer"   }
+		// clang-format off
+		static   std::map<PeerConnection::SdpType, const std::string> sdpType2String =
+		{
+			{ PeerConnection::SdpType::OFFER,    "offer"    },
+			{ PeerConnection::SdpType::PRANSWER, "pranswer" },
+			{ PeerConnection::SdpType::ANSWER,   "answer"   }
+		};
+		return sdpType2String;
 	};
 
-	std::map<webrtc::PeerConnectionInterface::IceConnectionState, const std::string>
-		PeerConnection::iceConnectionState2String =
+	std::map<webrtc::PeerConnectionInterface::IceConnectionState, const std::string>& PeerConnection::GetIceConnectionState2String()
 	{
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionNew,          "new"          },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionChecking,     "checking"     },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionConnected,    "connected"    },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionCompleted,    "completed"    },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionFailed,       "failed"       },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionDisconnected, "disconnected" },
-		{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionClosed,       "closed"       }
+
+	static  std::map<webrtc::PeerConnectionInterface::IceConnectionState, const std::string>
+		iceConnectionState2String =
+		{
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionNew,          "new"          },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionChecking,     "checking"     },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionConnected,    "connected"    },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionCompleted,    "completed"    },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionFailed,       "failed"       },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionDisconnected, "disconnected" },
+			{ webrtc::PeerConnectionInterface::IceConnectionState::kIceConnectionClosed,       "closed"       }
+		};
+
+		return iceConnectionState2String;
 	};
 
-	std::map<webrtc::PeerConnectionInterface::IceGatheringState, const std::string>
-		PeerConnection::iceGatheringState2String =
-	{
-		{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringNew,       "new"       },
-		{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringGathering, "gathering" },
-		{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringComplete,  "complete"  }
-	};
 
-	std::map<webrtc::PeerConnectionInterface::SignalingState, const std::string>
-		PeerConnection::signalingState2String =
+	std::map<webrtc::PeerConnectionInterface::IceGatheringState, const std::string>& PeerConnection::GetIceGatheringState2String()
+	{
+		static  std::map<webrtc::PeerConnectionInterface::IceGatheringState, const std::string>
+		iceGatheringState2String =
+		{
+			{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringNew,       "new"       },
+			{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringGathering, "gathering" },
+			{ webrtc::PeerConnectionInterface::IceGatheringState::kIceGatheringComplete,  "complete"  }
+		};
+		return iceGatheringState2String;
+	};  
+
+	 std::map<webrtc::PeerConnectionInterface::SignalingState, const std::string>& PeerConnection::GetSignalingState2String()
+	{
+	static  std::map<webrtc::PeerConnectionInterface::SignalingState, const std::string>
+		signalingState2String =
 	{
 		{ webrtc::PeerConnectionInterface::SignalingState::kStable,             "stable"               },
 		{ webrtc::PeerConnectionInterface::SignalingState::kHaveLocalOffer,     "have-local-offer"     },
@@ -55,7 +72,12 @@ namespace mediasoupclient
 		{ webrtc::PeerConnectionInterface::SignalingState::kHaveRemotePrAnswer, "have-remote-pranswer" },
 		{ webrtc::PeerConnectionInterface::SignalingState::kClosed,             "closed"               }
 	};
-	// clang-format on
+
+	return signalingState2String;
+
+	}
+
+		// clang-format on
 
 	/* Instance methods. */
 
@@ -183,7 +205,7 @@ namespace mediasoupclient
 		rtc::scoped_refptr<SetSessionDescriptionObserver> observer(
 		  new rtc::RefCountedObject<SetSessionDescriptionObserver>());
 
-		const auto& typeStr = sdpType2String[type];
+		const auto& typeStr = GetSdpType2String()[type];
 		auto future         = observer->GetFuture();
 
 		sessionDescription = webrtc::CreateSessionDescription(typeStr, sdp, &error);
@@ -213,7 +235,7 @@ namespace mediasoupclient
 		rtc::scoped_refptr<SetSessionDescriptionObserver> observer(
 		  new rtc::RefCountedObject<SetSessionDescriptionObserver>());
 
-		const auto& typeStr = sdpType2String[type];
+		const auto& typeStr = GetSdpType2String()[type];
 		auto future         = observer->GetFuture();
 
 		sessionDescription = webrtc::CreateSessionDescription(typeStr, sdp, &error);
@@ -499,8 +521,8 @@ namespace mediasoupclient
 	  webrtc::PeerConnectionInterface::SignalingState newState)
 	{
 		MSC_TRACE();
-
-		MSC_DEBUG("[newState:%s]", PeerConnection::signalingState2String[newState].c_str());
+		
+		MSC_DEBUG("[newState:%s]", (PeerConnection::GetSignalingState2String()[newState]).c_str());
 	}
 
 	/**
@@ -551,7 +573,6 @@ namespace mediasoupclient
 	{
 		MSC_TRACE();
 
-		MSC_DEBUG("[newState:%s]", PeerConnection::iceConnectionState2String[newState].c_str());
 	}
 
 	/**
@@ -562,7 +583,6 @@ namespace mediasoupclient
 	{
 		MSC_TRACE();
 
-		MSC_DEBUG("[newState:%s]", PeerConnection::iceGatheringState2String[newState].c_str());
 	}
 
 	/**

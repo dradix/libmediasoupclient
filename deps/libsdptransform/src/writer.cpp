@@ -45,7 +45,7 @@ namespace sdptransform
 		// Loop through OuterOrder for matching properties on session.
 		for (auto type : OuterOrder)
 		{
-			for (auto& rule : grammar::rulesMap.at(type))
+			for (auto& rule : grammar::GetRulesMap().at(type))
 			{
 				json::const_iterator it;
 
@@ -74,11 +74,11 @@ namespace sdptransform
 		// Then for each media line, follow the InnerOrder.
 		for (auto& mLine : session.at("media"))
 		{
-			makeLine(sdpstream, 'm', grammar::rulesMap.at('m')[0], mLine);
+			makeLine(sdpstream, 'm', grammar::GetRulesMap().at('m')[0], mLine);
 
 			for (auto type : InnerOrder)
 			{
-				for (auto& rule : grammar::rulesMap.at(type))
+				for (auto& rule : grammar::GetRulesMap().at(type))
 				{
 					json::const_iterator it;
 

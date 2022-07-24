@@ -110,7 +110,19 @@ namespace mediasoupclient
 					// Get RTCP feedback for each codec.
 					for (const auto& fb : m["rtcpFb"])
 					{
-						auto jsonCodecIt = codecsMap.find(std::stoi(fb["payload"].get<std::string>()));
+						int CodecNumber = 0;
+						if(fb["payload"].is_number())
+						{
+							CodecNumber = fb["payload"].get<int>();
+						}else if (fb["payload"].is_string())
+						{
+							CodecNumber =std::stoi(fb["payload"].get<std::string>());
+						}
+						else
+						{
+							continue;
+						}
+						auto jsonCodecIt = codecsMap.find(CodecNumber);
 
 						if (jsonCodecIt == codecsMap.end())
 							continue;

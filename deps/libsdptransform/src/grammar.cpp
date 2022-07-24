@@ -6,7 +6,8 @@ namespace sdptransform
 	{
 		bool hasValue(const json& o, const std::string& key);
 
-		const std::map<char, std::vector<Rule>> rulesMap =
+		std::map<char, std::vector<Rule>>& GetRulesMap(){
+		static std::map<char, std::vector<Rule>> rulesMap =
 		{
 			{
 				'v',
@@ -1071,6 +1072,8 @@ namespace sdptransform
 					},
 				}
 			}
+		};
+		return rulesMap;
 		};
 
 		bool hasValue(const json& o, const std::string& key)

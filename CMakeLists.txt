@@ -12,10 +12,15 @@ configure_file (
 	"${PROJECT_SOURCE_DIR}/version.hpp.in"
 	"${PROJECT_SOURCE_DIR}/include/version.hpp"
 )
-SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -stdlib=libc++ -nostdinc++ \
--I${UE5_ROOT}/Engine/Source/ThirdParty/Unix/LibCxx/include/c++/v1 \
+SET(CMAKE_LD_FLAGS  "${CMAKE_LD_FLAGS} -stdlib=libc++ 
+
 -L${UE5_ROOT}/Engine/Source/ThirdParty/Unix/LibCxx/lib \
--static -lc++abi -pthread -fuse-ld=lld \
+-static   -lc++abi -pthread -fuse-ld=lld  -nodefaultlibs\
+ ")
+
+ SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS}  -nostdinc++ \
+-I${UE5_ROOT}/Engine/Source/ThirdParty/Unix/LibCxx/include/c++/v1 \
+-static -pthread  \
  ")
  set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # C++ standard requirements.

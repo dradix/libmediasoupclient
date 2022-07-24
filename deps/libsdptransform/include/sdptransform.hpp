@@ -25,7 +25,8 @@ namespace sdptransform
 			std::function<const std::string(const json&)> formatFunc;
 		};
 
-		extern const std::map<char, std::vector<Rule>> rulesMap;
+
+		extern std::map<char, std::vector<Rule>>& GetRulesMap();
 	}
 
 	json parse(const std::string& sdp);
